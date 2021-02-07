@@ -40,7 +40,7 @@ class _showTimeState extends State<showTime> {
 
   @override
   Widget build(BuildContext context) {
-    final adhaar = ModalRoute.of(context).settings.arguments;
+    final dynamic val = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: Center(
         child: Column(
@@ -55,7 +55,11 @@ class _showTimeState extends State<showTime> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Map<String, dynamic> data = {'adhaar': adhaar};
+          Map<String, dynamic> data = {
+            'adhaar': val[0],
+            'district': val[1],
+            'block': val[2]
+          };
           setState(() {
             getTime(data).then((value) => {
                   if (value > 60 && value < 1440)
@@ -69,7 +73,7 @@ class _showTimeState extends State<showTime> {
                           ' ${value ~/ 1440} hours and ${value % 60} hours min for your vaccination'
                     }
                   else
-                    {time = 'your time has come for vaccination'}
+                    {time = '${value ~/ 1440} min left for your vaccination'}
                 });
           });
         },

@@ -280,8 +280,11 @@ class _RegisterState extends State<Register> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => showTime(),
-                            settings:
-                                RouteSettings(arguments: _aadharno.value.text),
+                            settings: RouteSettings(arguments: [
+                              _aadharno.value.text,
+                              district,
+                              _block
+                            ]),
                             fullscreenDialog: true));
                     //pref.setString('reg', 'done');
                   });

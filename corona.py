@@ -2,23 +2,30 @@ from flask import Flask,request
 import json
 import requests
 import mysql.connector
+from math import ceil
 app = Flask(__name__)
 mydb = mysql.connector.connect(host="localhost" , user="root" , passwd="covid@123",database = "mydb")
-cursor = mydb.cursor()
+insert = "INSERT INTO Agra (block,adhaar,priority) VALUES (%s ,%s,%s)"
 
+cursor = mydb.cursor("")
+# cursor.execute(insert,('1' , '123456654321','3'))
+# mydb.commit()
 
+# cursor.execute("SELECT * FROM Agra")
+# myresult = cursor.fetchall()
+# for x in myresult:
+#     print(x)
+    
+    
 
-# cursor.execute("CREATE TABLE Mirzapur(block INT(1),adhaar VARCHAR(12), priority INT(3))")
+# cursor.execute("CREATE TABLE Mirzapur(block INT(1),adhaar VARCHAR(12), priority int(3))")
 # cursor.execute("CREATE TABLE Ghaziabad(block INT(1),adhaar VARCHAR(12), priority INT(3))")
 # cursor.execute("CREATE TABLE Lucknow(block INT(1),adhaar VARCHAR(12), priority INT(3))")
-# cursor.execute("CREATE TABLE Agra(block INT(1),adhaar VARCHAR(12), priority INT(3))")
-#cursor.execute("insert into agra (block,adhaar,priority) Values(1 ,'123456789012',41)")
-cursor.execute("SELECT * FROM Agra")
 
-myresult = cursor.fetchall()
 
-for x in myresult:
-  print(x)
+
+
+
 
 density = {
 'Agra' : 1084*100/11320,
@@ -49,6 +56,7 @@ category = {
 
 
 
+
 @app.route('/register',methods = ['POST'])      
 def register():
     
@@ -58,7 +66,7 @@ def register():
 
         result = request.get_json()
         k = request.get_json(force=True)
-        print(k)
+        #print(k)
         countries_api_res = requests.get('https://api.covid19india.org/state_district_wise.json')
         state = countries_api_res.json()
 
@@ -66,11 +74,25 @@ def register():
         d= density[k['district']]
         cat = category[k['occupation']]
 
-        print(d)
-        print(a)
-        print(cat)
+        #print(d)
+        #print(a)
+        #print(cat)
         value = ((3*d) + (3*cat) + ((70 - int(k['age']))*100/70) + 3*(a/pop[k['district']]*100))/10
-        print(value)
+        #print(value)
+        val = (k['block'],k['aadhar_no'],str(ceil(value)))
+
+        cursor.execute(insert,val)
+        mydb.commit()
+        cursor.execute("SELECT * FROM "+ k['district'] + " ORDER BY priority desc")
+        
+        myresult = cursor.fetchall()
+        for x in myresult:
+            print(x)
+        
+
+        
+        
+
         
 
     #formula
@@ -85,17 +107,28 @@ def gettime():
 
 
     if request.method == 'POST':
+        i = 1
         result = request.get_json()
         k = request.get_json(force=True)
         print(k)
         countries_api_res = requests.get('https://api.covid19india.org/state_district_wise.json')
         state = countries_api_res.json()
+        a = state['Uttar Pradesh']['districtData'][k['district']]['active']
+        cursor.execute("SELECT * FROM "+ k['district'])
+        myresult = cursor.fetchall()
+        for x in myresult:
+            i = i + 1
+            print(x[1])
+            if x[1] == k['adhaar']:
+                return json.dumps(i * 50)
+        
 
-        a = state['Uttar Pradesh']['districtData']['Ghaziabad']['active']
+
+        
     #formula
 
 
-        return json.dumps(a)
+        #return json.dumps(a)
 
 
 if __name__ == '__main__':
