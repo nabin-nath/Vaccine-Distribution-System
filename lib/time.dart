@@ -16,7 +16,7 @@ class _showTimeState extends State<showTime> {
     super.initState();
   }
 
-  String time = 'fetching';
+  String time = 'fetching.. please refresh the page';
   Future<int> getTime(Map<String, dynamic> data) async {
     final http.Response response = await http.post(
         'http://10.0.2.2:5000/gettime',
@@ -44,10 +44,13 @@ class _showTimeState extends State<showTime> {
     return Scaffold(
       body: Center(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              time,
-              style: TextStyle(fontSize: 20),
+            Center(
+              child: Text(
+                time,
+                style: TextStyle(fontSize: 20),
+              ),
             )
           ],
           mainAxisAlignment: MainAxisAlignment.center,
@@ -60,22 +63,20 @@ class _showTimeState extends State<showTime> {
             'district': val[1],
             'block': val[2]
           };
-          setState(() {
-            getTime(data).then((value) => {
-                  if (value > 60 && value < 1440)
-                    {
-                      time =
-                          ' ${value ~/ 60} hours and ${value % 60} left min for your vaccination'
-                    }
-                  else if (value > 1440)
-                    {
-                      time =
-                          ' ${value ~/ 1440} hours and ${value % 60} hours min for your vaccination'
-                    }
-                  else
-                    {time = '${value ~/ 1440} min left for your vaccination'}
-                });
-          });
+
+          getTime(data).then((value) => {
+                setState(() {
+                  if (value > 60 && value < 1440) {
+                    time =
+                        ' ${value ~/ 60} hours and ${value % 60} left min for your vaccination';
+                  } else if (value > 1440) {
+                    time =
+                        ' ${value ~/ 1440} hours and ${value % 60} hours min for your vaccination';
+                  } else {
+                    time = '${value ~/ 1440} min left for your vaccination';
+                  }
+                })
+              });
         },
         child: Icon(Icons.refresh),
       ),

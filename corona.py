@@ -107,20 +107,25 @@ def gettime():
 
 
     if request.method == 'POST':
-        i = 1
+        
         result = request.get_json()
         k = request.get_json(force=True)
         print(k)
         countries_api_res = requests.get('https://api.covid19india.org/state_district_wise.json')
         state = countries_api_res.json()
         a = state['Uttar Pradesh']['districtData'][k['district']]['active']
-        cursor.execute("SELECT * FROM "+ k['district'])
+        cursor.execute("SELECT * FROM "+ k['district'] + " ORDER BY priority desc")
         myresult = cursor.fetchall()
+        i = 1
         for x in myresult:
             i = i + 1
             print(x[1])
             if x[1] == k['adhaar']:
-                return json.dumps(i * 50)
+                a = i
+                i = 1
+                return json.dumps(a * 50)
+            
+
         
 
 
