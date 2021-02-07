@@ -19,7 +19,7 @@
 | Rest                    | 50                                                          |
 
 * GROWTH RATE OF Covid CASES IN NATIVE POPULATION (in %)
-  * Imported from API
+  * Imported from API (https://api.covid19india.org/state_district_wise.json)
 * POPULATION DENSITY (factor out of 100)
   * (cur_state_density / max_pop_density) * 100
   
