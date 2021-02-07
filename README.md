@@ -39,8 +39,12 @@
     <img src="app-preface-1.png" alt="App-Preface-Image1">
 </p>
 
+# How Program Fuctions
 
-
+  * Step1: Fetch details of user
+  * Step2: Feed the details into model to assign score/priority value.
+  * Step3: Save the user into database with it’s assigned priority.
+  * Step4: Keep the database sorted in order to get ordering of vaccination of regional population.
 
 ## Technologies Used
 
