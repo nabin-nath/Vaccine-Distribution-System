@@ -122,7 +122,9 @@ class _RegisterState extends State<Register> {
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(45, 0, 0, 0),
               child: Row(
@@ -132,10 +134,11 @@ class _RegisterState extends State<Register> {
                     child: new DropdownButton<String>(
                       value: _occupation,
                       items: <String>[
-                        'Doctor',
-                        'Asha worker',
+                        'Working',
+                        'Unhealthy',
                         'Frontline Workers',
-                        'None of the above',
+                        'Lactating Women',
+                        'Rest'
                       ].map((String value) {
                         return new DropdownMenuItem<String>(
                           value: value,
@@ -149,10 +152,12 @@ class _RegisterState extends State<Register> {
                           super.setState(() {});
                         });
                       },
-                      hint: Text('Occupation'),
+                      hint: Text('Category'),
                     ),
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: new DropdownButton<String>(
@@ -181,7 +186,9 @@ class _RegisterState extends State<Register> {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(45, 0, 0, 0),
               child: Row(
@@ -192,9 +199,9 @@ class _RegisterState extends State<Register> {
                       value: _district,
                       items: <String>[
                         'Agra',
-                        'Lucknow',
+                        'Varanasi',
                         'Mirzapur',
-                        'Gaziabad',
+                        'Ghaziabad',
                       ].map((String value) {
                         return new DropdownMenuItem<String>(
                           value: value,
@@ -211,7 +218,9 @@ class _RegisterState extends State<Register> {
                       hint: Text('District'),
                     ),
                   ),
-                  SizedBox(width: 140,),
+                  SizedBox(
+                    width: 140,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: new DropdownButton<String>(
@@ -237,11 +246,12 @@ class _RegisterState extends State<Register> {
                       hint: Text('Block'),
                     ),
                   )
-
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             FloatingActionButton(
               onPressed: () async {
                 if (_formKey.currentState.validate() &&
@@ -253,7 +263,7 @@ class _RegisterState extends State<Register> {
                   String occupation = _occupation;
                   String state = _state;
                   String district = _district;
-                  String slot = _block;
+                  String block = _block;
 
                   Map<String, dynamic> data = {
                     "name": name,
@@ -262,7 +272,7 @@ class _RegisterState extends State<Register> {
                     "occupation": occupation,
                     "state": state,
                     "district": district,
-                    "slot" : slot
+                    "block": block
                   };
 
                   create_post(data).then((value) {
