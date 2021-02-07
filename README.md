@@ -4,7 +4,7 @@
 ## Novelty of the Solution
 * Despite how universal this vaccine distribution problem is, there isn’t any concrete model or system to fully optimise this process in order to flatten the rising Covid cases curve.
 
-# PARAMETERS CONSIDERED
+# Parameters Considered
 * AGE/LIFE EXPECTANCY (%)
   * max(0, (avg_age - current_age) / 70) * 100
 
