@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:covid_app/time.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:covid_app/main.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -207,13 +208,16 @@ class _RegisterState extends State<Register> {
                     "district": district
                   };
 
-                  create_post(data).then((value) => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => showTime(),
-                          settings:
-                              RouteSettings(arguments: _aadharno.value.text),
-                          fullscreenDialog: true)));
+                  create_post(data).then((value) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => showTime(),
+                            settings:
+                                RouteSettings(arguments: _aadharno.value.text),
+                            fullscreenDialog: true));
+                    //pref.setString('reg', 'done');
+                  });
                 }
               },
               child: Icon(Icons.done),
