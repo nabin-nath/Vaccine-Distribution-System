@@ -53,62 +53,71 @@ class _RegisterState extends State<Register> {
               "Registration",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            TextFormField(
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return "Name cant be empty";
-                }
-                return null;
-              },
-              controller: _name,
-              decoration: InputDecoration(
-                labelText: "Name",
-                icon: Icon(
-                  Icons.account_circle,
-                  size: 30,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return "Name cant be empty";
+                  }
+                  return null;
+                },
+                controller: _name,
+                decoration: InputDecoration(
+                  labelText: "Name",
+                  icon: Icon(
+                    Icons.account_circle,
+                    size: 30,
+                  ),
+                  hintText: "Enter your name",
                 ),
-                hintText: "Enter your name",
               ),
             ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return "Aadhar no cant be null";
-                } else if (value.length != 12) {
-                  return "Aadhar no is of 12 digits";
-                }
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return "Aadhar no cant be null";
+                  } else if (value.length != 12) {
+                    return "Aadhar no is of 12 digits";
+                  }
 
-                return !RegExp(r"\d\d\d\d\d\d\d\d\d\d\d\d").hasMatch(value)
-                    ? "*Please enter a valid aadhar no"
-                    : null;
-              },
-              controller: _aadharno,
-              decoration: InputDecoration(
-                labelText: "Aadhar No",
-                icon: Icon(
-                  Icons.account_circle,
-                  size: 30,
+                  return !RegExp(r"\d\d\d\d\d\d\d\d\d\d\d\d").hasMatch(value)
+                      ? "*Please enter a valid aadhar no"
+                      : null;
+                },
+                controller: _aadharno,
+                decoration: InputDecoration(
+                  labelText: "Aadhar No",
+                  icon: Icon(
+                    Icons.account_circle,
+                    size: 30,
+                  ),
+                  hintText: "Enter your Aadhar no",
                 ),
-                hintText: "Enter your Aadhar no",
               ),
             ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return "Age no cant be empty";
-                }
-                return null;
-              },
-              controller: _age,
-              decoration: InputDecoration(
-                labelText: "Age",
-                icon: Icon(
-                  Icons.account_circle,
-                  size: 30,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return "Age no cant be empty";
+                  }
+                  return null;
+                },
+                controller: _age,
+                decoration: InputDecoration(
+                  labelText: "Age",
+                  icon: Icon(
+                    Icons.account_circle,
+                    size: 30,
+                  ),
+                  hintText: "Enter your Age",
                 ),
-                hintText: "Enter your Age",
               ),
             ),
             new DropdownButton<String>(
