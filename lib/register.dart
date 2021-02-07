@@ -36,6 +36,7 @@ class _RegisterState extends State<Register> {
   String _occupation;
   String _state;
   String _district;
+  String _block;
 
   @override
   Widget build(BuildContext context) {
@@ -121,72 +122,126 @@ class _RegisterState extends State<Register> {
                 ),
               ),
             ),
-            new DropdownButton<String>(
-              value: _occupation,
-              items: <String>[
-                'Doctor',
-                'Asha worker',
-                'Frontline Workers',
-                'None of the above',
-              ].map((String value) {
-                return new DropdownMenuItem<String>(
-                  value: value,
-                  child: new Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {
-                _occupation = value;
-                setState(() {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  super.setState(() {});
-                });
-              },
-              hint: Text('Occupation'),
+            SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(45, 0, 0, 0),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new DropdownButton<String>(
+                      value: _occupation,
+                      items: <String>[
+                        'Doctor',
+                        'Asha worker',
+                        'Frontline Workers',
+                        'None of the above',
+                      ].map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        _occupation = value;
+                        setState(() {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          super.setState(() {});
+                        });
+                      },
+                      hint: Text('Occupation'),
+                    ),
+                  ),
+                  SizedBox(width: 20,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new DropdownButton<String>(
+                      value: _state,
+                      items: <String>[
+                        'Uttar Pradesh',
+                        'Bihar',
+                        'West Bengal',
+                        'Assam',
+                      ].map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        _state = value;
+                        setState(() {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          super.setState(() {});
+                        });
+                      },
+                      hint: Text('State'),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            new DropdownButton<String>(
-              value: _state,
-              items: <String>[
-                'Uttar Pradesh',
-                'Bihar',
-                'West Bengal',
-                'Assam',
-              ].map((String value) {
-                return new DropdownMenuItem<String>(
-                  value: value,
-                  child: new Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {
-                _state = value;
-                setState(() {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  super.setState(() {});
-                });
-              },
-              hint: Text('State'),
+            SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(45, 0, 0, 0),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new DropdownButton<String>(
+                      value: _district,
+                      items: <String>[
+                        'Agra',
+                        'Lucknow',
+                        'Mirzapur',
+                        'Gaziabad',
+                      ].map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        _district = value;
+                        setState(() {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          super.setState(() {});
+                        });
+                      },
+                      hint: Text('District'),
+                    ),
+                  ),
+                  SizedBox(width: 140,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new DropdownButton<String>(
+                      value: _block,
+                      items: <String>[
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                      ].map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        _block = value;
+                        setState(() {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          super.setState(() {});
+                        });
+                      },
+                      hint: Text('Block'),
+                    ),
+                  )
+
+                ],
+              ),
             ),
-            new DropdownButton<String>(
-              value: _district,
-              items: <String>[
-                'Agra',
-                'Lucknow',
-                'Mirzapur',
-                'Gaziabad',
-              ].map((String value) {
-                return new DropdownMenuItem<String>(
-                  value: value,
-                  child: new Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {
-                _district = value;
-                setState(() {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  super.setState(() {});
-                });
-              },
-              hint: Text('District'),
-            ),
+            SizedBox(height: 10,),
             FloatingActionButton(
               onPressed: () async {
                 if (_formKey.currentState.validate() &&
@@ -198,6 +253,7 @@ class _RegisterState extends State<Register> {
                   String occupation = _occupation;
                   String state = _state;
                   String district = _district;
+                  String slot = _block;
 
                   Map<String, dynamic> data = {
                     "name": name,
@@ -205,7 +261,8 @@ class _RegisterState extends State<Register> {
                     "aadhar_no": aadharno,
                     "occupation": occupation,
                     "state": state,
-                    "district": district
+                    "district": district,
+                    "slot" : slot
                   };
 
                   create_post(data).then((value) {
