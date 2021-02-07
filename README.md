@@ -32,6 +32,12 @@
     3. Priority 3    =    20 - 40%
     4. Priority 4    =    40 - 70%
     5. Priority 5    =     70 - 100% (Bottom 30%)
+    
+    
+## Images 
+<p align="center">
+    <img src="app-preface-1.png" alt="App-Preface-Image1">
+</p>
 
 
 
