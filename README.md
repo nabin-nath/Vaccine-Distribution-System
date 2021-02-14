@@ -45,7 +45,7 @@
   * Step2: Feed the details into model to assign score/priority value.
   * Step3: Save the user into database with it’s assigned priority.
   * Step4: Keep the database sorted in order to get ordering of vaccination of regional population.
-
+  * Step5: Calculate time of vaccination for each individual accordingly.
 ## Technologies Used
 
 * This project is a starting point for a Flutter application.
